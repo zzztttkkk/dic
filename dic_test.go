@@ -49,12 +49,12 @@ func TestDi(t *testing.T) {
 			GetByToken(&g13, "13")
 
 		fmt.Println("F", f, g12, g13)
-	}).Try(func(d *D) {
+	}).IfReady(func(d *D) {
 		fmt.Println("D Try In Exec")
 	}).
 		Run()
 
-	container.Try(func(a *A, f F) {
+	container.IfReady(func(a *A, f F) {
 		fmt.Println("A F Try After Exec")
 	})
 }

@@ -148,7 +148,7 @@ func (dic *Container[T]) Register(fnc any) *Container[T] {
 	return dic
 }
 
-func (dic *Container[T]) Try(fnc any) *Container[T] {
+func (dic *Container[T]) IfReady(fnc any) *Container[T] {
 	ele := dic.mkfnc(fnc)
 	if dic.execAsync(ele) {
 		return dic
