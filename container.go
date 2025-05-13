@@ -182,7 +182,7 @@ func (dic *Container[T]) execAsync(ele *_DiFnc) bool {
 		for _, rv := range rvs {
 			rev, ok := rv.Interface().(error)
 			if ok {
-				panic(rev)
+				panic(fmt.Errorf("async paniced: %s, %s", runtime.FuncForPC(ele.fnc.Pointer()).Name(), rev))
 			}
 		}
 		ele.done = true
@@ -239,7 +239,7 @@ func (dic *Container[T]) Run() {
 				for _, rv := range rvs {
 					rev, ok := rv.Interface().(error)
 					if ok {
-						panic(rev)
+						panic(fmt.Errorf("paniced: %s, %s", runtime.FuncForPC(ele.fnc.Pointer()).Name(), rev))
 					}
 					dic.append(rv)
 				}
